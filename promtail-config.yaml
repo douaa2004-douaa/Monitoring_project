@@ -1,0 +1,68 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /var/lib/promtail/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: apache-access
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: apache
+          host: mainserver
+          type: access
+          __path__: /var/log/apache2/access.log
+
+  - job_name: apache-error
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: apache
+          host: mainserver
+          type: error
+          __path__: /var/log/apache2/error.log
+
+  - job_name: mysql
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: mysql
+          host: mainserver
+          __path__: /var/log/mysql/*.log
+
+  - job_name: linux-logs
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: varlog
+          host: mainserver
+          __path__: /var/log/syslog
+
+  - job_name: linux-logs-auth
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: varlog
+          host: mainserver
+          __path__: /var/log/auth.log
+
+  - job_name: linux-logs-kern
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: varlog
+          host: mainserver
+          __path__: /var/log/kern.log
+
+  - job_name: linux-logs-recursive
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: varlog
+          host: mainserver
+          __path__: /var/log/**/*.log
