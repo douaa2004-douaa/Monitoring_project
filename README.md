@@ -34,10 +34,9 @@ Defined label-based correlation strategy (`job="apache"`, `job="mysql"`) to enab
 
 ### 2️⃣ Declarative Deployment
 Created 3 YAML files for reproducible deployment:
-```bash
 docker compose up -d
 → Entire stack (Grafana + Loki + Promtail) running in one command.
-
+```
 📂 Repository Structure
 accent-monitoring/
 ├── docker-compose.yml          # Stack orchestration
@@ -49,7 +48,7 @@ accent-monitoring/
     ├── dashboard-mysql.png
     ├── dashboard-system.png
     └── dashboard-correlation.png
-
+```
 🎯 What I Learned
 Real monitoring isn't about big tools — it's about solving actual constraints
 Labels > paths for cross-service correlation
